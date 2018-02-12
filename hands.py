@@ -45,20 +45,28 @@ def scsi():
 	
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
-		
+
 def mac():
+
+	flag=0
+	test=0
+	flag=vbox_mac()
+	if(flag==0):
+		test=vmware_mac()
+	if(test==0):
+		print '\t\t \033[1;32mNo!\033[1;m'
+		
+	
+
+		
+def vmware_mac():
 	
 	mac=['00:05:69','00:0c:29','00:0C:29','00:1C:14','00:1c:14','00:50:56'] 
 	
 	try:
 		addr= open("/sys/class/net/ens33/address").read()
 		address=addr[0:8]
-		addr1= open("/sys/class/net/enp0s3/address").read() 
-		address1=addr[0:8]
-		#print address
-		flag=str_substring(addr1, "08:00:27")
-		if(flag==1):
-			print "\t\t[-]\033[1;31mVirtualBox Detected\033[1;m"
+		
 		for i in mac:
 			#print i
 			if (i==address):
@@ -67,7 +75,23 @@ def mac():
 	except IOError as e:
 		#print "\t\t I/O error({0}): {1}".format(e.errno, e.strerror)
 		if(e.errno==2):
-			print '\t\t \033[1;32mNo!\033[1;m'
+			return 0
+
+def vbox_mac():
+	try:
+		
+		addr1= open("/sys/class/net/enp0s3/address").read() 
+		address1=addr[0:8]
+		#print address
+		flag=str_substring(addr1, "08:00:27")
+		if(flag==1):
+			print "\t\t[-]\033[1;31mVirtualBox Detected\033[1;m"
+		
+			
+	except IOError as e:
+		#print "\t\t I/O error({0}): {1}".format(e.errno, e.strerror)
+		if(e.errno==2):
+			return 0
 
 def bios_vendor():
 	name=open("/sys/class/dmi/id/bios_vendor").read()
