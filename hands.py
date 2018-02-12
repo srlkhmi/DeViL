@@ -53,7 +53,7 @@ def mac():
 	flag=vbox_mac()
 	if(flag==0):
 		test=vmware_mac()
-	if(test==0):
+	if(test==0 and flag==0):
 		print '\t\t \033[1;32mNo!\033[1;m'
 		
 	
