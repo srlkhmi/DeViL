@@ -40,7 +40,7 @@ def scsi():
 	for i in lists:
 		flag=list_substring(list_dir,i)
 		if(flag==1):
-			print "[--]\033[1;31m"+i+" Detected\033[1;m"
+			print '\t\t [-]\033[1;31m'+i+'Detected\033[1;m'
 			test=test+1
 	
 	if test==0:
@@ -58,11 +58,11 @@ def mac():
 		#print address
 		flag=str_substring(addr1, "08:00:27")
 		if(flag==1):
-			print "\t\t[--]\033[1;31mVirtualBox Detected\033[1;m"
+			print "\t\t[-]\033[1;31mVirtualBox Detected\033[1;m"
 		for i in mac:
 			#print i
 			if (i==address):
-				print "\t\t[--]\033[1;31mVMWare Detected\033[1;m"
+				print "\t\t[-]\033[1;31mVMWare Detected\033[1;m"
 			
 	except IOError as e:
 		#print "\t\t I/O error({0}): {1}".format(e.errno, e.strerror)
@@ -76,7 +76,7 @@ def bios_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "[--]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -91,7 +91,7 @@ def product_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "[--]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -103,7 +103,7 @@ def sys_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "[--]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -115,7 +115,7 @@ def board_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "[--]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
