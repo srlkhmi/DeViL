@@ -8,7 +8,7 @@ import sys
 import subprocess
 import sys
 
-
+vendor_names={'VMware','Vbox','Phoenix Technologies LTD','KVM'}
 
 def flags():
 	if 'hypervisor' in open("/proc/cpuinfo").read():
@@ -24,7 +24,7 @@ def scsi():
 	if any("VMw" in s for s in read):
 		print '\t\t [-]\033[1;31mDetected\033[1;m'
 		flag=1
-	if any("VBox" in s for s in read):
+	if any("VBOX" in s for s in read):
 		print '\t\t [-]\033[1;31mDetected\033[1;m'
 		flag=1
 
@@ -53,8 +53,9 @@ def mac():
 				
 
 def presence():
+	
 	list_dir=os.listdir('/usr/bin/')
-	if any("vmw" in s for s in list_dir):
+	if any("vmware-" in s for s in list_dir):
 		print "[--]\033[1;31mVMware Detected\033[1;m"
 		flag=1
 	if any("VBox" in s for s in list_dir):
@@ -63,7 +64,23 @@ def presence():
 		
 	if flag==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
-		
+
+def bios_vendor():
+	name=open("/sys/class/dmi/id/bios_vendor").read()
+	print name
+	
+
+def product_vendor():
+	name=open("/sys/class/dmi/id/product_name").read()	
+	print name
+	
+def sys_vendor():
+	name=open("/sys/class/dmi/id/sys_vendor").read()
+	for i in vendor_names:
+		if i==name:
+			print yes
+	
+			
 
 
 def main():
@@ -99,11 +116,14 @@ def main():
 	print "\t [*] Checking MAC Address "
 	mac()
 	
+	print "\t [*] Checking bi0s Vendor "
+	bios_vendor()
 	
+	print "\t [*] Checking Product Name "
+	product_vendor()
 	
-	
-
-
+	print "\t [*] Checking System Vendor "
+	sys_vendor()
 
 if __name__ == "__main__":
 	main()
