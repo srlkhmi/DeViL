@@ -48,10 +48,10 @@ def scsi():
 		
 def mac():
 	
-	mac=['00:05:69','00:0c:29','00:0C:29','00:1C:14','00:1c:14','00:50:56'] #'08:00:27']
+	mac=['00:05:69','00:0c:29','00:0C:29','00:1C:14','00:1c:14','00:50:56'] 
 	
 	try:
-		addr= open("/sys/class/net/eth0/address").read()
+		addr= open("/sys/class/net/ens33/address").read()
 		address=addr[0:8]
 		addr1= open("/sys/class/net/enp0s3/address").read() 
 		address1=addr[0:8]
@@ -76,7 +76,7 @@ def bios_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31mDetected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -91,7 +91,7 @@ def product_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31mDetected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -103,7 +103,7 @@ def sys_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31mDetected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -115,7 +115,7 @@ def board_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31m"+i+" Detected\033[1;m"
+			print "\t\t[-]\033[1;31mDetected\033[1;m"
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
