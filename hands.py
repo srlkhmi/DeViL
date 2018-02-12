@@ -81,7 +81,7 @@ def vbox_mac():
 	try:
 		
 		addr1= open("/sys/class/net/enp0s3/address").read() 
-		address1=addr[0:8]
+		address1=addr1[0:8]
 		#print address
 		flag=str_substring(addr1, "08:00:27")
 		if(flag==1):
