@@ -1,13 +1,22 @@
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
+#include<errno.h>
+#include<stdlib.h>
+
+#define VMWARE_HYPERVISOR_MAGIC 0x564D5868 
+#define VMWARE_HYPERVISOR_PORT  0x5658  
+#define VMWARE_PORT_CMD_GETVERSION      10 
+#define UINT_MAX 0xFFFFFFFF 
+
+extern int errno;
 
 int print(int a)
 {
 	if(a>0)
 	 {
 	 	printf("\033[1;31m");
-     	printf("\t\t Detected! \n");
+     	printf("\t\t[-] Detected! \n");
      	printf("\033[0m");
 	 }
 	 else
@@ -62,6 +71,22 @@ int vmexit_cpuid()
 	return 1;
 }
 
+int in()
+{
+	int eax=0,ebx=0,ecx=0,edx=0,ebx_val=0;
+	__asm__ volatile("inl (%%dx)" 
+			: "=a"(eax),"=c"(ecx),"=d"(edx),"=b"(ebx)\
+			: "a"(VMWARE_HYPERVISOR_MAGIC),	"c" ( VMWARE_PORT_CMD_GETVERSION),"d"(VMWARE_HYPERVISOR_PORT), "b"(UINT_MAX)
+			);
+	printf(" Value of errno: %d\n ", errno);
+	if(ebx==0x564D5868)
+	{
+		return 1;
+	}
+	
+	return 0;
+
+} 
 int main()
 {
 	
@@ -72,6 +97,10 @@ int main()
 	
 	printf("\t [*] Checking VMEXIT through CPUID instruction \n");
 	a=vmexit_cpuid();
+	print(a);
+	
+	printf("\t [*] Checking IN instruction \n");
+	a=in();
 	print(a);
 	return 0;  
 
