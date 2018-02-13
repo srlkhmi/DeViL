@@ -39,6 +39,22 @@ int hv_bit()
    
 }
 
+int hv_vendor()
+{
+	char vendor[13];
+	//char strings[3]={"VMwareVMware",""}
+	int ecx=0,ebx=0,edx=0;
+	__asm__ volatile("cpuid" \
+			: "=b"(ebx),"=c"(ecx),"=d"(edx) \
+			: "a"(0x40000000));
+   	sprintf(vendor  , "%c%c%c%c", ebx, (ebx >> 8), (ebx >> 16), (ebx >> 24));
+	sprintf(vendor+4, "%c%c%c%c", ecx, (ecx >> 8), (ecx >> 16), (ecx >> 24));
+	sprintf(vendor+8, "%c%c%c%c", edx, (edx >> 8), (edx >> 16), (edx >> 24));
+	vendor[12] = 0x00;
+	
+   
+}
+
 
 int rdtsc_diff() {
 	unsigned long long ret, ret2;
@@ -99,9 +115,13 @@ int main()
 	a=vmexit_cpuid();
 	print(a);
 	
-	printf("\t [*] Checking IN instruction \n");
-	a=in();
-	print(a);
+	a=hv_vendor();
+	printf("\t [*] Checking Virtualization vendor string from CPUID instruction \n");
+	//print(a);
+	
+	//printf("\t [*] Checking IN instruction \n");
+	//a=in();
+	//print(a);
 	return 0;  
 
 }
