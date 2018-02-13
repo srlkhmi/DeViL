@@ -164,5 +164,6 @@ def kernel_modules():
 		if(flag==1):
 			print_val(0)
 			test=test+1
+			break
 	if test==0:
 		print_val(1)
