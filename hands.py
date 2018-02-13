@@ -13,6 +13,17 @@ def list_substring(lists,sub_str):
 	else:
 		return 0	
 
+def print_val(val):
+	if(val==0):
+		print '\t\t[-]\033[1;31mDetected\033[1;m'
+	else:
+		print '\t\t \033[1;32mNo!\033[1;m'
+
+def print_sval(val, name):
+	if(val==0):
+		print '\t\t[-]\033[1;31m'+name+' Detected\033[1;m'
+	
+
 def presence():
 	
 	test=0
@@ -21,16 +32,16 @@ def presence():
 	for i in lists:
 		flag=list_substring(list_dir,i)
 		if(flag==1):
-			print "[--]\033[1;31m"+i+" Detected\033[1;m"
+			print_sval(0,i)
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
 			
 def flags():
 	if 'hypervisor' in open("/proc/cpuinfo").read():
-		print '\t\t[-]\033[1;31mDetected\033[1;m'
+		print_val(0)
 	else:
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
 		
 def scsi():
 	test=0
@@ -40,11 +51,11 @@ def scsi():
 	for i in lists:
 		flag=list_substring(list_dir,i)
 		if(flag==1):
-			print '\t\t[-]\033[1;31m'+i+'Detected\033[1;m'
+			print_sval(0,i)
 			test=test+1
 	
 	if test==0:
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
 
 def mac():
 
@@ -54,7 +65,7 @@ def mac():
 	if(flag==0):
 		test=vmware_mac()
 	if(test==0 and flag==0):
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
 		
 	
 
@@ -103,7 +114,7 @@ def bios_vendor():
 			print "\t\t[-]\033[1;31mDetected\033[1;m"
 			test=test+1
 	if test==0:
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
 	
 	
 	
@@ -115,10 +126,10 @@ def product_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31mDetected\033[1;m"
+			print_val(0)
 			test=test+1
 	if test==0:
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
 	
 def sys_vendor():
 	name=open("/sys/class/dmi/id/sys_vendor").read()
@@ -127,10 +138,10 @@ def sys_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31mDetected\033[1;m"
+			print_val(0)
 			test=test+1
 	if test==0:
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
 	
 def board_vendor():
 	name=open("/sys/class/dmi/id/board_vendor").read()
@@ -139,7 +150,7 @@ def board_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31mDetected\033[1;m"
+			print_val(0)
 			test=test+1
 	if test==0:
-		print '\t\t \033[1;32mNo!\033[1;m'
+		print_val(1)
