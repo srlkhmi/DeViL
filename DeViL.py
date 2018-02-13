@@ -44,7 +44,7 @@ def main():
 	print "\t [*] Checking Board Vendor "
 	board_vendor()
 	
-	print "\t [*] Checking Kernel Modules "
+	print "\t [*] Checking Loadable Kernel Modules "
 	kernel_modules()
 
 
