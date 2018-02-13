@@ -19,9 +19,8 @@ def print_val(val):
 	else:
 		print '\t\t \033[1;32mNo!\033[1;m'
 
-def print_sval(val, name):
-	if(val==0):
-		print '\t\t[-]\033[1;31m'+name+' Detected\033[1;m'
+def print_sval(name):
+	print '\t\t[-]\033[1;31m'+name+' Detected\033[1;m'
 	
 
 def presence():
@@ -32,7 +31,7 @@ def presence():
 	for i in lists:
 		flag=list_substring(list_dir,i)
 		if(flag==1):
-			print_sval(0,i)
+			print_sval(i)
 			test=test+1
 	if test==0:
 		print '\t\t \033[1;32mNo!\033[1;m'
@@ -51,7 +50,7 @@ def scsi():
 	for i in lists:
 		flag=list_substring(list_dir,i)
 		if(flag==1):
-			print_sval(0,i)
+			print_sval(i)
 			test=test+1
 	
 	if test==0:
@@ -158,11 +157,18 @@ def board_vendor():
 def kernel_modules():
 	name=open("/proc/modules").read()
 	test=0
-	lists={"vmw_balloon","vmwfgx","vboxvideo","vboxguest"}
-	for i in lists:
+	list1={"vmw_balloon","vmwfgx"}
+	list2={"vboxvideo","vboxguest"}
+	for i in list1:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print_val(0)
+			print_sval("VMWare ")
+			test=test+1
+			break
+	for i in list2:
+		flag=str_substring(name,i)
+		if(flag==1):
+			print_sval("VirtualBox")
 			test=test+1
 			break
 	if test==0:
