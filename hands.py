@@ -154,3 +154,15 @@ def board_vendor():
 			test=test+1
 	if test==0:
 		print_val(1)
+		
+def kernel_modules():
+	name=open("/proc/modules").read()
+	test=0
+	lists={"vmw_balloon","vmwfgx","vboxvideo","vboxguest"}
+	for i in lists:
+		flag=str_substring(name,i)
+		if(flag==1):
+			print_val(0)
+			test=test+1
+	if test==0:
+		print_val(1)

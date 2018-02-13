@@ -10,8 +10,7 @@ from hands import *
 def main():
 	os.system('toilet -F metal -f bigascii12 DeViL')
         #print "\t\twww.github.com/srlkhmi/DeViL "
-	print "\n\n"
-	
+	#print "\n"
 	
 	print "[*]Distribution : ", open("/proc/sys/kernel/ostype").read()
 	print "[*]OS: ", open("/etc/lsb-release").read()[85:103]
@@ -44,6 +43,9 @@ def main():
 	
 	print "\t [*] Checking Board Vendor "
 	board_vendor()
+	
+	print "\t [*] Checking Kernel Modules "
+	kernel_modules()
 
 
 
