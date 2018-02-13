@@ -1,15 +1,15 @@
-#include<stdio.h>
-#include<string.h>
-#include<unistd.h>
-#include<errno.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <unistd.h>
+#include <errno.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <sys/types.h>
 
 #define VMWARE_HYPERVISOR_MAGIC 0x564D5868 
 #define VMWARE_HYPERVISOR_PORT  0x5658  
 #define VMWARE_PORT_CMD_GETVERSION      10 
 #define UINT_MAX 0xFFFFFFFF 
-
-extern int errno;
 
 int print(int a)
 {
@@ -27,6 +27,13 @@ int print(int a)
 	 }
 	return 0;
 }
+
+void handler(int signal)
+{
+  print(0);
+  exit(0);    
+}
+
 
 int hv_bit()
 {
@@ -95,21 +102,23 @@ int vmexit_cpuid()
 	return 1;
 }
 
-int in()
+void in()
 {
-	int eax=0,ebx=0,ecx=0,edx=0,ebx_val=0;
+	int eax=0,ebx=0,ecx=0,edx=0;
+	
+	signal(SIGSEGV, handler);
+	 
 	__asm__ volatile("inl (%%dx)" 
 			: "=a"(eax),"=c"(ecx),"=d"(edx),"=b"(ebx)\
 			: "a"(VMWARE_HYPERVISOR_MAGIC),	"c" ( VMWARE_PORT_CMD_GETVERSION),"d"(VMWARE_HYPERVISOR_PORT), "b"(UINT_MAX)
 			);
-	printf(" Value of errno: %d\n ", errno);
+	
 	if(ebx==0x564D5868)
 	{
-		return 1;
+		print(1);
 	}
 	
-	return 0;
-
+		
 } 
 int main()
 {
@@ -127,9 +136,9 @@ int main()
 	printf("\t [*] Checking Virtualization vendor string from CPUID instruction \n");
 	print(a);
 	
-	//printf("\t [*] Checking IN instruction \n");
-	//a=in();
-	//print(a);
+	printf("\t [*] Checking IN instruction \n");
+	in();
+	
 	return 0;  
 
 }

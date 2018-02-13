@@ -28,7 +28,7 @@ def presence():
 			
 def flags():
 	if 'hypervisor' in open("/proc/cpuinfo").read():
-		print '\t\t [-]\033[1;31mDetected\033[1;m'
+		print '\t\t[-]\033[1;31mDetected\033[1;m'
 	else:
 		print '\t\t \033[1;32mNo!\033[1;m'
 		
@@ -40,7 +40,7 @@ def scsi():
 	for i in lists:
 		flag=list_substring(list_dir,i)
 		if(flag==1):
-			print '\t\t [-]\033[1;31m'+i+'Detected\033[1;m'
+			print '\t\t[-]\033[1;31m'+i+'Detected\033[1;m'
 			test=test+1
 	
 	if test==0:
