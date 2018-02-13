@@ -15,8 +15,8 @@ int print(int a)
 {
 	if(a>0)
 	 {
-	 	printf("\033[1;31m");
-     	printf("\t\t[-] Detected! \n");
+	 	
+     	printf("\t\t[-] \033[1;31m Detected! \n");
      	printf("\033[0m");
 	 }
 	 else
