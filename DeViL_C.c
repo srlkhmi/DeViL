@@ -27,6 +27,12 @@ int print(int a)
 	 }
 	return 0;
 }
+void sprint(char *name)
+{
+		printf("\t\t[-]\033[1;31mDetected! %s\n",name);
+     	printf("\033[0m");
+
+}
 
 void handler(int signal)
 {
@@ -115,7 +121,7 @@ void in()
 	
 	if(ebx==0x564D5868)
 	{
-		print(1);
+		sprint("VMware");
 	}
 	
 		
