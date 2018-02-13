@@ -29,7 +29,7 @@ int print(int a)
 }
 void sprint(char *name)
 {
-		printf("\t\t[-]\033[1;31mDetected! %s\n",name);
+		printf("\t\t[-]\033[1;31m%s Detected! \n",name);
      	printf("\033[0m");
 
 }
