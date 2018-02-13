@@ -15,12 +15,12 @@ def list_substring(lists,sub_str):
 
 def print_val(val):
 	if(val==0):
-		print '\t\t[-]\033[1;31mDetected\033[1;m'
+		print '\t\t[-]\033[1;31mDetected!\033[1;m'
 	else:
 		print '\t\t \033[1;32mNo!\033[1;m'
 
 def print_sval(name):
-	print '\t\t[-]\033[1;31m'+name+' Detected\033[1;m'
+	print '\t\t[-]\033[1;31m'+name+' Detected!\033[1;m'
 	
 
 def presence():
