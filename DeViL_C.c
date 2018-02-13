@@ -41,8 +41,9 @@ int hv_bit()
 
 int hv_vendor()
 {
+	int i=0;
 	char vendor[13];
-	//char strings[3]={"VMwareVMware",""}
+	char *strings[2]={"VMwareVMware","KVMKVMKVM"};
 	int ecx=0,ebx=0,edx=0;
 	__asm__ volatile("cpuid" \
 			: "=b"(ebx),"=c"(ecx),"=d"(edx) \
@@ -51,7 +52,14 @@ int hv_vendor()
 	sprintf(vendor+4, "%c%c%c%c", ecx, (ecx >> 8), (ecx >> 16), (ecx >> 24));
 	sprintf(vendor+8, "%c%c%c%c", edx, (edx >> 8), (edx >> 16), (edx >> 24));
 	vendor[12] = 0x00;
+	for(i=0;i<2;i++)
+	{
+		if(strcmp(strings[i],vendor)==0)
+			return 1;
+			
+	}
 	
+	return 0;
    
 }
 
@@ -117,7 +125,7 @@ int main()
 	
 	a=hv_vendor();
 	printf("\t [*] Checking Virtualization vendor string from CPUID instruction \n");
-	//print(a);
+	print(a);
 	
 	//printf("\t [*] Checking IN instruction \n");
 	//a=in();
