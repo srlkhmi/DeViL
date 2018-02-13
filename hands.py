@@ -110,7 +110,7 @@ def bios_vendor():
 	for i in lists:
 		flag=str_substring(name,i)
 		if(flag==1):
-			print "\t\t[-]\033[1;31mDetected\033[1;m"
+			print_val(0)
 			test=test+1
 	if test==0:
 		print_val(1)
