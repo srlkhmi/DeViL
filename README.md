@@ -6,6 +6,11 @@ DeViL (Detect Virtual Machine in Linux) is a demonstration tool that employs sev
 
 $ ./DeViL.sh 
 
+### SCREENSHOTS:
+
+
+![alt text](Images/DeViL_host.png)
+
 # Author
 
 Sreelakshmi (@srlkhmi)(https://twitter.com/#!/srlkhmi)
