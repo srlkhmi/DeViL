@@ -10,9 +10,11 @@ $ ./DeViL.sh
 
 
 ![alt text](Images/DeViL_host.png)
+![alt text](Images/virtualbox_host.png)
+![alt text](Images/vmware_blog.png)
 
 # AUTHOR
 
 Sreelakshmi (@srlkhmi)(https://twitter.com/#!/srlkhmi)
-s
+
  
